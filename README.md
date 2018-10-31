@@ -2,4 +2,6 @@
 
 Terminal version of Conway's 'Game of Life'
 
-To compile and run, do: `gcc main.c -l ncurses && ./a.out`
+To compile: `gcc main.c -l ncurses`
+
+You can call the executable by itself, or with an optional integer to specify the size of the grid: `./a.out` or `./a.out 50`
