@@ -11,7 +11,7 @@ int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n);
 
 int main(void) {
     /* Set n */
-    int32_t n = 50;
+    int32_t n = 10;
 
     /* the universe is a square, there is also a parallel universe */
     int64_t universe[n * n], parallel_universe[n * n];
@@ -24,6 +24,7 @@ int main(void) {
 
     /* start curses */
     initscr();
+    curs_set(0);
     clear();
     refresh();
 
@@ -50,12 +51,8 @@ int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n) {
 
     /* Calculate next iteration into the parallel universe */
     for (int64_t i = 0; i < (n * n); ++i) {
-
-        /* Print universe as it is */
-        for (int64_t j = 0; j < (n * n); ++j) {
-            mvprintw(j / n, 2 * (j % n), (universe[j] ? "*" : " "));
-        }
-        refresh();
+        /* Add universe cell to screen */
+        mvaddch(i / n, 2 * (i % n), (universe[i] ? ACS_CKBOARD : ' '));
 
         /* See how the neighbors are */
         neighbors[0] = (i <= n) ? 0 : ((i % 10 == 0) ? 0 : universe[i - 11]);
@@ -105,12 +102,15 @@ int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n) {
         }
     }
 
+    /* Update screen */
+    refresh();
+
     /* Copy parellel universe into the universe */
     for (int64_t j = 0; j < (n * n); ++j) {
         universe[j] = parallel_universe[j];
     }
 
-    /* Wait two seconds */
+    /* Wait one second */
     sleep(1);
 
     return 1;
