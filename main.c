@@ -32,7 +32,7 @@ int main(void) {
     while(advance(universe, parallel_universe, n))
         ;
 
-    /* this part will never execute but it's here for good measure */
+    /* Program ends when all cells are inactive */
     endwin();
     return 0;
 }
