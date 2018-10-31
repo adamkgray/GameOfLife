@@ -58,14 +58,16 @@ int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n) {
         mvaddch(i / n, 2 * (i % n), (universe[i] ? ACS_CKBOARD : ' '));
 
         /* See how the neighbors are */
-        neighbors[0] = (i <= n) ? 0 : ((i % n == 0) ? 0 : universe[i - (n + 1)]);
-        neighbors[1] = (i <= n) ? 0 : universe[i - n];
-        neighbors[2] = (i <= n) ? 0 : ((i % (n - 1) == 0) ? 0 : universe[i - (n - 1)]);
+        neighbors[0] = (i < n) ? 0 : (i % n == 0) ? 0 : universe[i - n - 1];
+        neighbors[1] = (i < n) ? 0 : universe[i - n];
+        neighbors[2] = (i < n) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i - n + 1];
+
         neighbors[3] = (i % n == 0) ? 0 : universe[i - 1];
-        neighbors[4] = (i % (n - 1) == 0) ? 0 : universe[i + 1];
-        neighbors[5] = (i >= ((n * n) - n)) ? 0 : ((i % n == 0) ? 0 : universe[i + (n - 1)]);
+        neighbors[4] = ((i + 1) % n == 0) ? 0 : universe[i + 1];
+
+        neighbors[5] = (i >= ((n * n) - n)) ? 0 : (i % n == 0) ? 0 : universe[i + n - 1];
         neighbors[6] = (i >= ((n * n) - n)) ? 0 : universe[i + n];
-        neighbors[7] = (i >= ((n * n) - n)) ? 0 : ((i % (n - 1) == 0) ? 0 : universe[i + (n + 1)]);
+        neighbors[7] = (i >= ((n * n) - n)) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i + n + 1];
 
         /* Count active neighbors */
         int8_t active_neighbors = 0;
