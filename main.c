@@ -7,31 +7,32 @@
 #include <unistd.h>
 #include <ncurses.h>
 
-int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n);
+int8_t advance(int8_t * universe, int8_t * parallel_universe, int16_t n);
 
 int main(int argc, char ** argv) {
+    /* start curses */
+    initscr();
+    curs_set(0);
+    clear();
+    refresh();
+
     /* Set n */
-    int32_t n;
-    if (argc < 2) {
-        n = 10;
-    } else {
-        n = (int32_t)atoi(argv[1]);
+    int16_t n = 0;
+    if (argc >= 2) {
+        n = (int16_t)atoi(argv[1]);
+    }
+    if (!n) {
+        n = LINES - 2;  /* fill up screen height by default */
     }
 
     /* the universe is a square, there is also a parallel universe */
-    int64_t universe[n * n], parallel_universe[n * n];
+    int8_t universe[n * n], parallel_universe[n * n];
 
     /* fill universe with 1s and 0s */
     srand(time(NULL));
     for (int64_t i = 0; i < (n * n); ++i) {
         universe[i] = (rand() & 1);
     }
-
-    /* start curses */
-    initscr();
-    curs_set(0);
-    clear();
-    refresh();
 
     /* the game of life */
     while(advance(universe, parallel_universe, n))
@@ -42,7 +43,7 @@ int main(int argc, char ** argv) {
     return 0;
 }
 
-int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n) {
+int8_t advance(int8_t * universe, int8_t * parallel_universe, int16_t n) {
     /* keep track of how many steps have been taken so far */
     static int16_t steps = 0;
 
