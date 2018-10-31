@@ -58,36 +58,14 @@ int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n) {
 
         /* Count active neighbors */
         int8_t active_neighbors = 0;
-        for (int8_t j = 0; j < 8; ++j) {
-            switch (j) {
-                case 0:
-                    active_neighbors += (i < n) ? 0 : (i % n == 0) ? 0 : universe[i - n - 1];
-                    break;
-                case 1:
-                    active_neighbors += (i < n) ? 0 : universe[i - n];
-                    break;
-                case 2:
-                    active_neighbors += (i < n) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i - n + 1];
-                    break;
-                case 3:
-                    active_neighbors += (i % n == 0) ? 0 : universe[i - 1];
-                    break;
-                case 4:
-                    active_neighbors += ((i + 1) % n == 0) ? 0 : universe[i + 1];
-                    break;
-                case 5:
-                    active_neighbors += (i >= ((n * n) - n)) ? 0 : (i % n == 0) ? 0 : universe[i + n - 1];
-                    break;
-                case 6:
-                    active_neighbors += (i >= ((n * n) - n)) ? 0 : universe[i + n];
-                    break;
-                case 7:
-                    active_neighbors += (i >= ((n * n) - n)) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i + n + 1];
-                    break;
-                default:
-                    break;
-            }
-        }
+        active_neighbors += (i < n) ? 0 : (i % n == 0) ? 0 : universe[i - n - 1];                       /* 0 */
+        active_neighbors += (i < n) ? 0 : universe[i - n];                                              /* 1 */
+        active_neighbors += (i < n) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i - n + 1];                 /* 2 */
+        active_neighbors += (i % n == 0) ? 0 : universe[i - 1];                                         /* 3 */
+        active_neighbors += ((i + 1) % n == 0) ? 0 : universe[i + 1];                                   /* 4 */
+        active_neighbors += (i >= ((n * n) - n)) ? 0 : (i % n == 0) ? 0 : universe[i + n - 1];          /* 5 */
+        active_neighbors += (i >= ((n * n) - n)) ? 0 : universe[i + n];                                 /* 6 */
+        active_neighbors += (i >= ((n * n) - n)) ? 0 : ((i + 1) % n == 0) ? 0 : universe[i + n + 1];    /* 7 */
 
         /* Calculate i in parallel_universe*/
         switch (universe[i]) {
