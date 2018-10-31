@@ -9,7 +9,7 @@
 
 int8_t advance(int64_t * universe, int64_t * parallel_universe, int32_t n);
 
-int main(int8_t argc, char ** argv) {
+int main(int argc, char ** argv) {
     /* Set n */
     int32_t n;
     if (argc < 2) {
