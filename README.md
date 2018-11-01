@@ -4,4 +4,6 @@ Terminal version of Conway's 'Game of Life'
 
 To compile: `gcc main.c -l ncurses`
 
-You can call the executable by itself, or with an optional integer to specify the size of the grid: `./a.out` or `./a.out 50`
+The executable can take two optional flags
+* `-n` followed by an integer resizes the dimensions of the universe
+* `-m` followed by an integer specifies the number of milliseconds between each step 
