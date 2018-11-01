@@ -2,18 +2,17 @@
 
 Terminal version of Conway's 'Game of Life'
 
-To compile: `gcc main.c -l ncurses`
+To compile, clone the repo and then run `make`
 
-The program defaults to a grid of height and width two less than the height of the terminal and 1000 milliseconds between each step
+This will produce an executable called `gameoflife`
 
-The program can take two optional flags
-* `-n` followed by an integer resizes the dimensions of the grid
-* `-m` followed by an integer specifies the number of milliseconds between each step 
+`-n <int>` specifies the dimensions of the grid
+
+`-m <int>` specifies the milliseconds between each step
 
 Example:
 
-```
-gameoflife -n 20 -m 100
-```
+`./gameoflife -n 20 -m 100`
 
-This specifies a 10x10 grid and 100 ms between each step
+Otherwise, `gameoflife` defaults to a gridsize that it 2 less than the terminal height, and steps that are 1000 milliseconds
+
