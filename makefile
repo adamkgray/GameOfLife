@@ -1,14 +1,15 @@
 CC 		= gcc
 CFLAGS	= -g
 CURSES	= -lncurses
-RM		= rm -f
+RM		= rm -rf
 
 default: all
 
-all: gameoflife
+all: install
 
-gameoflife: main.c
+install: main.c
 	$(CC) $(CFLAGS) -o gameoflife main.c $(CURSES)
 
 clean veryclean:
 	$(RM) gameoflife
+	$(RM) gameoflife.*
