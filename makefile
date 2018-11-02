@@ -12,4 +12,3 @@ install: main.c
 
 clean veryclean:
 	$(RM) gameoflife
-	$(RM) gameoflife.*
